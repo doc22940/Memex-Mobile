@@ -50,8 +50,8 @@ describe('navigation service tests', () => {
 
             if (index > 0) {
                 expect({
-                    route: service.getParam('route', 'DEFAULT'),
-                    index: service.getParam('index', -1),
+                    route: service.getParam('route' as any, 'DEFAULT'),
+                    index: service.getParam('index' as any, -1),
                 }).toEqual({
                     route: lastRoute,
                     index: lastIndex,
@@ -59,6 +59,7 @@ describe('navigation service tests', () => {
             }
             lastRoute = route
             lastIndex = index
+
             service.navigate(route as RouteName, params)
         })
     })
@@ -67,7 +68,9 @@ describe('navigation service tests', () => {
         const { service } = setupTest()
 
         const defaultVal = 1234
-        expect(service.getParam('dont-exist', defaultVal)).toBe(defaultVal)
-        expect(service.getParam('dont-exist')).toBeUndefined()
+        expect(service.getParam('dont-exist' as any, defaultVal)).toBe(
+            defaultVal,
+        )
+        expect(service.getParam('dont-exist' as any)).toBeUndefined()
     })
 })
