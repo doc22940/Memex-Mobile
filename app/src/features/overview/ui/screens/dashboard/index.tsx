@@ -9,7 +9,7 @@ import {
     NativeScrollEvent,
 } from 'react-native'
 import Logic, { State, Event, Props } from './logic'
-import { NavigationScreen } from 'src/ui/types'
+import { StatefulUIElement } from 'src/ui/types'
 import styles from './styles'
 import ResultPage from '../../components/result-page'
 import { UIPage } from 'src/features/overview/types'
@@ -19,13 +19,13 @@ import EmptyResults from '../../components/empty-results'
 import LoadingBalls from 'src/ui/components/loading-balls'
 import * as scrollHelpers from 'src/utils/scroll-helpers'
 
-export default class Dashboard extends NavigationScreen<Props, State, Event> {
+export default class Dashboard extends StatefulUIElement<Props, State, Event> {
     constructor(props: Props) {
         super(props, { logic: new Logic(props) })
     }
 
     private navToPageEditor = (page: UIPage, mode: EditorMode) => () => {
-        this.props.navigation.navigate('PageEditor', { page, mode })
+        this.props.services.navigation.navigate('PageEditor', { page, mode })
     }
 
     private initHandleDeletePress = (page: UIPage) => () =>
@@ -101,10 +101,12 @@ export default class Dashboard extends NavigationScreen<Props, State, Event> {
                     ListEmptyComponent={
                         <EmptyResults
                             goToPairing={() =>
-                                this.props.navigation.navigate('Sync')
+                                this.props.services.navigation.navigate('Sync')
                             }
                             goToTutorial={() =>
-                                this.props.navigation.navigate('Onboarding')
+                                this.props.services.navigation.navigate(
+                                    'Onboarding',
+                                )
                             }
                         />
                     }

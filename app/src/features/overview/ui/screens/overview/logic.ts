@@ -1,6 +1,6 @@
 import { UILogic, UIEvent, IncomingUIEvent, UIMutation } from 'ui-logic-core'
 
-import { NavigationProps, UIServices, UIStorageModules } from 'src/ui/types'
+import { UIServices, UIStorageModules } from 'src/ui/types'
 import { storageKeys } from '../../../../../../app.json'
 
 import { ResultType } from '../../../types'
@@ -16,8 +16,8 @@ export type Event = UIEvent<{
     setShowSideMenu: { show: boolean }
 }>
 
-export interface Props extends NavigationProps {
-    services: UIServices<'localStorage'>
+export interface Props {
+    services: UIServices<'localStorage' | 'navigation'>
     storage: UIStorageModules<'metaPicker' | 'overview' | 'pageEditor'>
 }
 
@@ -44,7 +44,7 @@ export default class Logic extends UILogic<State, Event> {
         >(storageKeys.showOnboarding)
 
         if (showOnboarding || showOnboarding === null) {
-            this.props.navigation.navigate('Onboarding')
+            this.props.services.navigation.navigate('Onboarding')
         }
     }
 

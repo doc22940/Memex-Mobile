@@ -4,15 +4,15 @@ import { View, Text, Linking, Image } from 'react-native'
 import { version, storageKeys } from '../../../../../../app.json'
 import EmptyLayout from 'src/ui/layouts/empty'
 import Button from 'src/ui/components/memex-btn'
-import { NavigationScreen, NavigationProps, UIServices } from 'src/ui/types'
+import { StatefulUIElement, UIServices } from 'src/ui/types'
 import Logic, { State, Event } from './logic'
 import styles from './styles'
 
-export interface Props extends NavigationProps {
-    services: UIServices<'localStorage' | 'sync'>
+export interface Props {
+    services: UIServices<'localStorage' | 'sync' | 'navigation'>
 }
 
-export default class MVPOverviewMenu extends NavigationScreen<
+export default class MVPOverviewMenu extends StatefulUIElement<
     Props,
     State,
     Event
@@ -42,12 +42,14 @@ export default class MVPOverviewMenu extends NavigationScreen<
         >(storageKeys.showOnboarding)
 
         if (showOnboarding || showOnboarding === null) {
-            this.props.navigation.navigate('Onboarding')
+            this.props.services.navigation.navigate('Onboarding')
         }
     }
 
-    private navToPairingScreen = () => this.props.navigation.navigate('Pairing')
-    private navToSyncScreen = () => this.props.navigation.navigate('Sync')
+    private navToPairingScreen = () =>
+        this.props.services.navigation.navigate('Pairing')
+    private navToSyncScreen = () =>
+        this.props.services.navigation.navigate('Sync')
 
     private handleTutorialPress = () =>
         this.props.navigation.navigate('Onboarding')
@@ -83,7 +85,9 @@ export default class MVPOverviewMenu extends NavigationScreen<
                         <Button
                             title="Dashboard"
                             onPress={() =>
-                                this.props.navigation.navigate('Overview')
+                                this.props.services.navigation.navigate(
+                                    'Overview',
+                                )
                             }
                             style={styles.btn}
                             secondary

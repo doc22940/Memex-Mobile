@@ -15,12 +15,12 @@ export type Event = UIEvent<{
     syncNow: {}
 }>
 
-export interface LogicDependencies {
-    services: UIServices<'localStorage' | 'sync'>
+export interface Props {
+    services: UIServices<'localStorage' | 'sync' | 'navigation'>
 }
 
 export default class Logic extends UILogic<State, Event> {
-    constructor(private dependencies: LogicDependencies) {
+    constructor(private props: Props) {
         super()
     }
 
@@ -30,7 +30,7 @@ export default class Logic extends UILogic<State, Event> {
 
     async init(incoming: IncomingUIEvent<State, Event, 'init'>) {
         await loadInitial<State>(this, async () => {
-            const { localStorage } = this.dependencies.services
+            const { localStorage } = this.props.services
 
             if (await localStorage.get(storageKeys.syncKey)) {
                 this.emitMutation({ isSynced: { $set: true } })
@@ -46,7 +46,7 @@ export default class Logic extends UILogic<State, Event> {
 
     async syncNow(incoming: IncomingUIEvent<State, Event, 'syncNow'>) {
         return executeUITask(this, 'syncState', async () => {
-            await this.dependencies.services.sync.continuousSync.forceIncrementalSync()
+            await this.props.services.sync.continuousSync.forceIncrementalSync()
         })
     }
 }

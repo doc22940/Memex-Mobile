@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, FlatList, ListRenderItem } from 'react-native'
 
-import { NavigationScreen } from 'src/ui/types'
+import { StatefulUIElement } from 'src/ui/types'
 import Logic, { Props, State, Event } from './logic'
 import MetaPicker from '../../components/meta-picker'
 import MetaPickerEntry from '../../components/meta-picker-entry'
@@ -12,7 +12,7 @@ import { MetaTypeShape, MetaTypeName } from 'src/features/meta-picker/types'
 import LoadingBalls from 'src/ui/components/loading-balls'
 import styles from './styles'
 
-export default class MetaPickerScreen extends NavigationScreen<
+export default class MetaPickerScreen extends StatefulUIElement<
     Props,
     State,
     Event

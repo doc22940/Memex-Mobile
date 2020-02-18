@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { NavigationScreen } from 'src/ui/types'
+import { StatefulUIElement } from 'src/ui/types'
 import Logic, { Props, State, Event } from './logic'
 import Filters from '../../components/menu'
 import Navigation from '../../components/navigation'
@@ -10,7 +10,7 @@ import Dashboard from '../dashboard'
 import CollectionsView from '../collections-view'
 import { ResultType } from 'src/features/overview/types'
 
-export default class OverviewMenu extends NavigationScreen<
+export default class OverviewMenu extends StatefulUIElement<
     Props,
     State,
     Event
@@ -50,7 +50,7 @@ export default class OverviewMenu extends NavigationScreen<
             <Navigation
                 icon="settings"
                 onSettingsPress={() =>
-                    this.props.navigation.navigate('SettingsMenu')
+                    this.props.services.navigation.navigate('SettingsMenu')
                 }
             >
                 Recently Saved

@@ -1,13 +1,15 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { StatefulUIElement } from 'src/ui/types'
+import { StatefulUIElement, UIServices } from 'src/ui/types'
 import Logic, { State, Event } from './logic'
 import SideMenu from '../../components/side-menu'
 import SideMenuItem from '../../components/side-menu-item'
+import { RouteName } from 'src/services/navigation/types'
 
 interface Props {
     hideMenu: () => void
+    services: UIServices<'navigation'>
 }
 
 export default class SideMenuScreen extends StatefulUIElement<
@@ -19,8 +21,8 @@ export default class SideMenuScreen extends StatefulUIElement<
         super(props, { logic: new Logic() })
     }
 
-    private navTo = (screen: string) => () =>
-        this.props.navigation.navigate(screen)
+    private navTo = (screen: RouteName) => () =>
+        this.props.services.navigation.navigate(screen)
 
     render() {
         return (

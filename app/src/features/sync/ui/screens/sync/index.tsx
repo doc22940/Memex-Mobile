@@ -1,7 +1,7 @@
 import React from 'react'
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
 
-import { NavigationScreen } from 'src/ui/types'
+import { StatefulUIElement } from 'src/ui/types'
 import Logic, { SyncScreenState, SyncScreenEvent, Props } from './logic'
 import SetupStage from '../../components/sync-setup-stage'
 import LoadingStage from '../../components/sync-loading-stage'
@@ -10,7 +10,7 @@ import SuccessStage from '../../components/sync-success-stage'
 import ErrorStage from '../../components/sync-error-stage'
 import ScanQRStage from '../../components/sync-scan-qr-stage'
 
-export default class SyncScreen extends NavigationScreen<
+export default class SyncScreen extends StatefulUIElement<
     Props,
     SyncScreenState,
     SyncScreenEvent
@@ -24,7 +24,7 @@ export default class SyncScreen extends NavigationScreen<
     }
 
     private handleCancelBtnPress = () => {
-        this.props.navigation.navigate('Overview')
+        this.props.services.navigation.navigate('Overview')
     }
 
     handleDoSync = async ({ initialMessage }: { initialMessage: string }) => {

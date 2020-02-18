@@ -2,7 +2,7 @@ import { UILogic, UIEvent, IncomingUIEvent, UIMutation } from 'ui-logic-core'
 
 import { storageKeys } from '../../../../../../app.json'
 import { OnboardingStage } from 'src/features/onboarding/types'
-import { UIServices, NavigationProps } from 'src/ui/types'
+import { UIServices } from 'src/ui/types'
 
 export interface State {
     onboardingStage: OnboardingStage
@@ -16,12 +16,16 @@ export type Event = UIEvent<{
     goToPrevStage: {}
 }>
 
+export interface Props {
+    services: UIServices<'localStorage' | 'navigation'>
+}
+
 export default class OnboardingScreenLogic extends UILogic<State, Event> {
     static MAX_ONBOARDING_STAGE: OnboardingStage = 3
 
     constructor(
-        private options: NavigationProps & {
-            services: UIServices<'localStorage'>
+        private props: {
+            services: UIServices<'localStorage' | 'navigation'>
         },
     ) {
         super()
@@ -32,7 +36,7 @@ export default class OnboardingScreenLogic extends UILogic<State, Event> {
     }
 
     async init() {
-        const syncKey = await this.options.services.localStorage.get<string>(
+        const syncKey = await this.props.services.localStorage.get<string>(
             storageKeys.syncKey,
         )
 
@@ -44,12 +48,11 @@ export default class OnboardingScreenLogic extends UILogic<State, Event> {
     async finishOnboarding(
         incoming: IncomingUIEvent<State, Event, 'finishOnboarding'>,
     ) {
-        await this.options.services.localStorage.set(
-            storageKeys.showOnboarding,
-            false,
-        )
+        const { localStorage, navigation } = this.props.services
 
-        await this.options.navigation.navigate(incoming.event.nextView)
+        await localStorage.set(storageKeys.showOnboarding, false)
+
+        await navigation.navigate(incoming.event.nextView)
     }
 
     goToLastStage(

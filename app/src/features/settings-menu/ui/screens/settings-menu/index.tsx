@@ -1,17 +1,13 @@
 import React from 'react'
 
 import { version } from '../../../../../../app.json'
-import { NavigationScreen, NavigationProps, UIServices } from 'src/ui/types'
-import Logic, { State, Event } from './logic'
+import { StatefulUIElement, UIServices } from 'src/ui/types'
+import Logic, { Props, State, Event } from './logic'
 import SettingsMenu from '../../components/settings-menu'
 import SettingsLink from '../../components/settings-link'
 import OutLink from '../../components/out-link'
 
-interface Props extends NavigationProps {
-    services: UIServices<'localStorage' | 'sync'>
-}
-
-export default class SettingsMenuScreen extends NavigationScreen<
+export default class SettingsMenuScreen extends StatefulUIElement<
     Props,
     State,
     Event
@@ -24,14 +20,14 @@ export default class SettingsMenuScreen extends NavigationScreen<
         if (this.state.isSynced) {
             this.processEvent('syncNow', {})
         } else {
-            this.props.navigation.navigate('Sync')
+            this.props.services.navigation.navigate('Sync')
         }
     }
 
     private navigateTo = (
         route: 'Pairing' | 'Overview' | 'Onboarding',
     ) => () => {
-        this.props.navigation.navigate(route)
+        this.props.services.navigation.navigate(route)
     }
 
     render() {

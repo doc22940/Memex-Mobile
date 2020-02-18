@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { NavigationScreen } from 'src/ui/types'
+import { StatefulUIElement } from 'src/ui/types'
 import MetaPicker from 'src/features/meta-picker/ui/screens/meta-picker'
 import Logic, { Props, State, Event } from './logic'
 import { MetaType, MetaTypeShape } from 'src/features/meta-picker/types'
@@ -11,7 +11,7 @@ import NoteInput from '../../components/note-input-segment'
 import StarPage from '../../components/star-page-segment'
 import AddTags from '../../components/add-tags-segment'
 
-export default class ShareModalScreen extends NavigationScreen<
+export default class ShareModalScreen extends StatefulUIElement<
     Props,
     State,
     Event

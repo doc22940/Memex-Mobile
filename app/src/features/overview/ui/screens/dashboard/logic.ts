@@ -2,7 +2,7 @@ import { UILogic, UIEvent, IncomingUIEvent, UIMutation } from 'ui-logic-core'
 import { AppState, AppStateStatus } from 'react-native'
 
 import { UIPageWithNotes as UIPage, UINote } from 'src/features/overview/types'
-import { UITaskState, UIStorageModules, NavigationProps } from 'src/ui/types'
+import { UITaskState, UIStorageModules, UIServices } from 'src/ui/types'
 import { loadInitial, executeUITask } from 'src/ui/utils'
 import { MOBILE_LIST_NAME } from '@worldbrain/memex-storage/lib/mobile-app/features/meta-picker/constants'
 import { ListEntry } from 'src/features/meta-picker/types'
@@ -29,8 +29,9 @@ export type Event = UIEvent<{
     toggleResultPress: { url: string }
 }>
 
-export interface Props extends NavigationProps {
+export interface Props {
     storage: UIStorageModules<'metaPicker' | 'overview' | 'pageEditor'>
+    services: UIServices<'navigation'>
     pageSize?: number
     getNow?: () => number
 }

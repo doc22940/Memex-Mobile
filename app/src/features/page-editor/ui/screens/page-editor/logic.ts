@@ -2,7 +2,7 @@ import { UILogic, UIEvent, IncomingUIEvent, UIMutation } from 'ui-logic-core'
 
 import { UIPageWithNotes as Page } from 'src/features/overview/types'
 import { EditorMode } from 'src/features/page-editor/types'
-import { NavigationProps, UIStorageModules, UITaskState } from 'src/ui/types'
+import { UIStorageModules, UITaskState, UIServices } from 'src/ui/types'
 import { loadInitial } from 'src/ui/utils'
 import { Spec } from 'immutability-helper'
 
@@ -24,7 +24,8 @@ export type Event = UIEvent<{
     setPage: { page: Page }
 }>
 
-export interface Props extends NavigationProps {
+export interface Props {
+    services: UIServices<'navigation'>
     storage: UIStorageModules<'metaPicker'>
 }
 
@@ -45,8 +46,8 @@ export default class Logic extends UILogic<State, Event> {
 
     async init(incoming: IncomingUIEvent<State, Event, 'init'>) {
         await loadInitial<State>(this, async () => {
-            const page = this.props.navigation.getParam('page', {})
-            const mode = this.props.navigation.getParam('mode', 'tags')
+            const page = this.props.services.navigation.getParam('page', {})
+            const mode = this.props.services.navigation.getParam('mode', 'tags')
             this.emitMutation({ page: { $set: page }, mode: { $set: mode } })
         })
     }

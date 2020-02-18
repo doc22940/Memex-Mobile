@@ -2,12 +2,7 @@ import { UILogic, UIEvent, IncomingUIEvent, UIMutation } from 'ui-logic-core'
 import { SyncReturnValue } from '@worldbrain/storex-sync'
 
 import { MetaType, MetaTypeShape } from 'src/features/meta-picker/types'
-import {
-    UITaskState,
-    UIServices,
-    UIStorageModules,
-    NavigationProps,
-} from 'src/ui/types'
+import { UITaskState, UIServices, UIStorageModules } from 'src/ui/types'
 import { loadInitial, executeUITask } from 'src/ui/utils'
 import { MOBILE_LIST_NAME } from '@worldbrain/memex-storage/lib/mobile-app/features/meta-picker/constants'
 
@@ -42,7 +37,7 @@ export type Event = UIEvent<{
     setCollectionsToAdd: { values: string[] }
 }>
 
-export interface Props extends NavigationProps {
+export interface Props {
     services: UIServices<'sync' | 'shareExt'>
     storage: UIStorageModules<'overview' | 'metaPicker' | 'pageEditor'>
 }

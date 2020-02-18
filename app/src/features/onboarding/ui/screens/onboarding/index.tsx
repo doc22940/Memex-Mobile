@@ -1,21 +1,15 @@
 import React from 'react'
 
-import { storageKeys } from '../../../../../../app.json'
-import { NavigationScreen, NavigationProps, UIServices } from 'src/ui/types'
-import OnboardingScreenLogic, { State, Event } from './logic'
+import { StatefulUIElement } from 'src/ui/types'
+import OnboardingScreenLogic, { Props, State, Event } from './logic'
 import OnboardingLayout, {
     Props as OnboardingLayoutProps,
 } from 'src/ui/layouts/onboarding'
-import Welcome from '../../components/welcome'
 import SaveWebsite from '../../components/save-websites'
 import OrganizeContent from '../../components/organize-content'
 import SyncOnboarding from '../../components/sync-onboarding'
 
-interface Props extends NavigationProps {
-    services: UIServices<'localStorage'>
-}
-
-export default class OnboardingScreen extends NavigationScreen<
+export default class OnboardingScreen extends StatefulUIElement<
     Props,
     State,
     Event

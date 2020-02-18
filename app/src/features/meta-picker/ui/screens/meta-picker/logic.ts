@@ -1,6 +1,6 @@
-import { UILogic, UIEvent, IncomingUIEvent, UIMutation } from 'ui-logic-core'
+import { UILogic, UIEvent, IncomingUIEvent } from 'ui-logic-core'
 
-import { UITaskState, UIStorageModules, NavigationProps } from 'src/ui/types'
+import { UITaskState, UIStorageModules } from 'src/ui/types'
 import { loadInitial, executeUITask } from 'src/ui/utils'
 import { MetaTypeShape, MetaType } from 'src/features/meta-picker/types'
 
@@ -17,7 +17,7 @@ export type Event = UIEvent<{
     setEntries: { entries: MetaTypeShape[] }
 }>
 
-export interface Props extends NavigationProps {
+export interface Props {
     onEntryPress: (item: MetaTypeShape) => void
     storage: UIStorageModules<'metaPicker'>
     isSyncLoading: boolean
