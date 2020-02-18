@@ -11,6 +11,7 @@ import { Storage } from 'src/storage/types'
 import { BackgroundProcessService } from './background-processing'
 import { KeychainService } from './keychain'
 import { KeychainAPI } from './keychain/types'
+import { NavigationService } from './navigation'
 
 export interface CreateServicesOptions {
     storage: Storage
@@ -18,6 +19,7 @@ export interface CreateServicesOptions {
     sharedSyncLog: SharedSyncLog
     auth: AuthService
     keychain: KeychainAPI
+    navigation: NavigationService
     localStorage: LocalStorageService
     devicePlatform: MemexSyncDevicePlatform
     disableSyncEncryption?: boolean

@@ -5,12 +5,14 @@ import { ShareExtService } from './share-ext'
 import { LocalStorageService } from './local-storage'
 import { BackgroundProcessService } from './background-processing'
 import { KeychainService } from './keychain'
+import { NavigationService } from './navigation'
 
 export interface Services {
     auth: AuthService
     sync: SyncService
     shareExt: ShareExtService
     keychain: KeychainService
+    navigation: NavigationService
     localStorage: LocalStorageService
     backgroundProcess: BackgroundProcessService
 }

@@ -25,6 +25,7 @@ import { createFirebaseSignalTransport } from './services/sync/signalling'
 import { LocalStorageService } from './services/local-storage'
 import { KeychainPackage } from './services/keychain/keychain'
 import { insertIntegrationTestData } from './tests/shared-fixtures/integration'
+import { NavigationService } from './services/navigation'
 
 if (!process.nextTick) {
     process.nextTick = setImmediate
@@ -50,6 +51,8 @@ export async function main() {
         auth: new WorldbrainAuthService(firebase),
         localStorage,
         storage,
+        // TODO: Fix
+        navigation: new NavigationService({ navigationAPI: {} as any }),
         signalTransportFactory: createFirebaseSignalTransport,
         sharedSyncLog: serverStorage.modules.sharedSyncLog,
         keychain: new KeychainPackage({ server: 'worldbrain.io' }),

@@ -5,8 +5,6 @@ import {
     // createStackNavigator,
     createAppContainer,
     NavigationContainer,
-    NavigationScreenProp,
-    NavigationRoute,
 } from 'react-navigation'
 
 import { UIDependencies } from './types'
@@ -35,30 +33,14 @@ export type NavigationContainerCreator = (
 const createMainNavigator: NavigationContainerCreator = deps =>
     createSwitchNavigator(
         {
-            Onboarding: (props: {
-                navigation: NavigationScreenProp<NavigationRoute>
-            }) => <Onboarding {...props} {...deps} />,
-            PageEditor: (props: {
-                navigation: NavigationScreenProp<NavigationRoute>
-            }) => <PageEditor {...props} {...deps} />,
-            Overview: (props: {
-                navigation: NavigationScreenProp<NavigationRoute>
-            }) => <Overview {...props} {...deps} />,
-            DebugConsole: (props: {
-                navigation: NavigationScreenProp<NavigationRoute>
-            }) => <DebugConsole {...props} {...deps} />,
-            MVPOverview: (props: {
-                navigation: NavigationScreenProp<NavigationRoute>
-            }) => <MVPOverview {...props} {...deps} />,
-            SettingsMenu: (props: {
-                navigation: NavigationScreenProp<NavigationRoute>
-            }) => <SettingsMenu {...props} {...deps} />,
-            Sync: (props: {
-                navigation: NavigationScreenProp<NavigationRoute>
-            }) => <Sync {...props} {...deps} />,
-            Pairing: (props: {
-                navigation: NavigationScreenProp<NavigationRoute>
-            }) => <Pairing {...props} {...deps} />,
+            Onboarding: () => <Onboarding {...deps} />,
+            PageEditor: () => <PageEditor {...deps} />,
+            Overview: () => <Overview {...deps} />,
+            DebugConsole: () => <DebugConsole {...deps} />,
+            MVPOverview: () => <MVPOverview {...deps} />,
+            SettingsMenu: () => <SettingsMenu {...deps} />,
+            Sync: () => <Sync {...deps} />,
+            Pairing: () => <Pairing {...deps} />,
         },
         {
             initialRouteName: 'Overview',
@@ -68,9 +50,7 @@ const createMainNavigator: NavigationContainerCreator = deps =>
 const createShareNavigator: NavigationContainerCreator = deps =>
     createSwitchNavigator(
         {
-            ShareModal: (props: {
-                navigation: NavigationScreenProp<NavigationRoute>
-            }) => <ShareModal {...props} {...deps} />,
+            ShareModal: () => <ShareModal {...deps} />,
         },
         {
             initialRouteName: 'ShareModal',
